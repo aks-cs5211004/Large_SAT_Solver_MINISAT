@@ -1,6 +1,8 @@
-import sys
 import os
+import sys
+
 import networkx as nx
+
 
 def is_complete_subgraph(graph, subgraph):
     num_vertices = len(subgraph)
@@ -8,6 +10,7 @@ def is_complete_subgraph(graph, subgraph):
     num_edges_in_subgraph = graph.subgraph(subgraph).number_of_edges()
     return num_edges_in_subgraph == expected_num_edges
 
+    
 
 
 # Function to find all complete subgraphs in a graph

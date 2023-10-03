@@ -1,5 +1,6 @@
 import sys
 from random import randint
+
 if(len(sys.argv)<4):
     print("ERROR: Too few Arguments")
     sys.exit(1)
