@@ -47,7 +47,7 @@ int main(){
         }
     }
 
-    int clauses = N+2*ne+(2+4*(N-1)+4*(N-1)*(K1-1)+1)+ (2+4*(N-1)+4*(N-1)*(K2-1)+1);
+    int clauses = N+2*ne+2*(2+4*(N-1)+4*(N-1)*(N-1)+1) +N-K2 + N-K1;
 	int total_variables = 2*N+2*N*N;
 	cout << "p cnf " << total_variables  << " " << clauses << endl;
 
@@ -66,7 +66,7 @@ int main(){
         cout <<"-"<<i<< " "<<1+(i+1)*N<<" 0" << endl;
         cout <<"-"<<1+(i)*N<<" "<<1+(i+1)*N<<" 0" << endl;
         // cout << "-" <<1+(i)*N<< " "<<1+(1+i)*N<<" 0" << endl;
-        for(int j=2; j<=K1; j++){
+        for(int j=2; j<=N; j++){
             // C5 ->3*(N-1)*(N-1)
             // cout <<  "-" << i<<" "<< "-" << (j-1)+(i)*N<<" "<<j+(1+i)*N<<" 0" << endl;
             // cout <<  "-" << j+(1+i)*N<<" "<< i<<" 0" << endl;
@@ -82,8 +82,8 @@ int main(){
         }
     }
     // C7 ->1
-    // for(int i=K1+1;i<=N;i++)
-    //     cout<<"-"<<i+N*(N+1)<<" 0"<<endl;
+    for(int i=K1+1;i<=N;i++)
+        cout<<"-"<<i+N*(N+1)<<" 0"<<endl;
     cout<<K1+N*(N+1)<<" 0"<<endl;
 
 
@@ -102,7 +102,7 @@ int main(){
         cout <<"-"<<1+(i)*N+N*N<<" "<<1+(i+1)*N+N*N<<" 0" << endl;
         // C4 ->(N-1)
         // cout << "-" <<1+(i)*N<< " "<<1+(1+i)*N<<" 0" << endl;
-        for(int j=2; j<=K2; j++){
+        for(int j=2; j<=N; j++){
             // C5 ->3*(N-1)*(N-1)
             // cout <<  "-" << i<<" "<< "-" << (j-1)+(i)*N<<" "<<j+(1+i)*N<<" 0" << endl;
             // cout <<  "-" << j+(1+i)*N<<" "<< i<<" 0" << endl;
@@ -118,8 +118,8 @@ int main(){
         }
     }
     // C7 ->1
-    // for(int i=K2+1;i<=N;i++)
-    //     cout<<"-"<<i+N*(N+1)+N*N<<" 0"<<endl;
+    for(int i=K2+1;i<=N;i++)
+        cout<<"-"<<i+N*(N+1)+N*N<<" 0"<<endl;
     cout<<K2+N*(N+1) +N*N<<" 0"<<endl;
 
 
