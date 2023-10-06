@@ -9,11 +9,10 @@ N=$(awk 'NR==1 {print $1; exit}' $INPUT)
 l=0
 r=$N
 
-while [ "$l" -lt "$r" ];
+while [ "$l" -le "$r" ];
 do
 
     mid=$(( (l+r)/2 ))
-    echo $mid
     ./execute2 "$mid" < "$INPUT" > "$OUTPUT"
     minisat $OUTPUT $MINISATOP
 
@@ -26,7 +25,7 @@ do
     fi
 done
 
-echo $(expr $l - 1)
+
 ./execute2 $(expr $l - 1) < "$INPUT" > "$OUTPUT"
 minisat $OUTPUT $MINISATOP
 chmod 777 execute4
@@ -35,3 +34,4 @@ INPUT="$1.satoutput"
 OUTPUT="$1.mapping"
 N=$(awk 'NR==1 {print $1; exit}' $GRAPH)
 ./execute4 "$N" < $INPUT > $OUTPUT
+echo $(expr $l - 1)

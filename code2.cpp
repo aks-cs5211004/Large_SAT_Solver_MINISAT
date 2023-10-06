@@ -39,7 +39,7 @@ int main(int argc, char** argv){
         }
     }
 
-    int clauses = ne+(2+4*(N-1)+4*(N-1)*(N-1)+1);
+    int clauses = ne+(2+4*(N-1)+4*(N-1)*(N-1)+1)+ N-K1;
 	int total_variables = N+N*N;
 	cout << "p cnf " << total_variables  << " " << clauses << endl;
 

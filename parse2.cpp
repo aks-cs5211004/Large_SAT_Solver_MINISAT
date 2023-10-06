@@ -19,6 +19,10 @@ int main(int argc, char** argv){
     int N=stoi(argv[1]);
     string wt;
     cin>>wt;
+    if(wt!="SAT"){
+        cout<<0<<endl;
+    }
+    else{
     vector<int> c1;
     vector<int> c2;
 
@@ -29,11 +33,12 @@ int main(int argc, char** argv){
             c1.push_back(x);
     }
     }
-    cout<<"#1"<<endl;
-    for(int i=0;i<c1.size();i++){
+    cout<<"#"<<1<<endl;
+    
+    for(int i=0;i<c1.size()-1;i++){
         cout<<c1[i]<<" ";
     }
-    cout<<endl;
-
+    cout<<c1[c1.size()-1];
+    }
 
 }
