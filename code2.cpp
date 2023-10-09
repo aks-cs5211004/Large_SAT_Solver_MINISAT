@@ -39,23 +39,26 @@ int main(int argc, char** argv){
         }
     }
 
-    int clauses = ne+(2+4*(N-1)+4*(N-1)*(K1-1)+1);
-	int total_variables = N+N*N;
+    int clauses = ne+(2+(K1-1)+3*(N-1)+4*(N-1)*(K1-1)+1);
+	int total_variables = N+N*K1;
 	cout << "p cnf " << total_variables  << " " << clauses << endl;
 
+
     // Clique 1
+    // (i-1)*K1+2*N
+    // (i-2)*K1+2*N
     // C1 ->2
-    cout << "-" << 1 << " "<<1+2*N-N<<" 0" << endl;
-    cout << "-" << 1+2*N-N<< " "<<1<<" 0" << endl;
-    // C2 ->(N-1)
-    for(int i=2; i<=N; i++){
-        cout << "-"<<i+2*N-N<<" 0" << endl;
+    cout << "-" << 1 << " "<<1+N<<" 0" << endl;
+    cout << "-" << 1+N<< " "<<1<<" 0" << endl;
+    // C2 ->(K1-1)
+    for(int i=2; i<=K1; i++){
+        cout << "-"<<i+N<<" 0" << endl;
     }
     for(int i=2; i<=N; i++){
         // C3 ->3*(N-1)
-        cout <<i<< " "<<1+(i)*N-N<<" "<<"-"<<1+(i+1)*N-N<<" 0" << endl;
-        cout <<"-"<<i<< " "<<1+(i+1)*N-N<<" 0" << endl;
-        cout <<"-"<<1+(i)*N-N<<" "<<1+(i+1)*N-N<<" 0" << endl;
+        cout <<i<< " "<<1+(i-2)*K1+N<<" "<<"-"<<1+(i-1)*K1+N<<" 0" << endl;
+        cout <<"-"<<i<< " "<<1+(i-1)*K1+N<<" 0" << endl;
+        cout <<"-"<<1+(i-2)*K1+N<<" "<<1+(i-1)*K1+N<<" 0" << endl;
         // cout << "-" <<1+(i)*N<< " "<<1+(1+i)*N<<" 0" << endl;
         for(int j=2; j<=K1; j++){
             // C5 ->3*(N-1)*(N-1)
@@ -64,18 +67,20 @@ int main(int argc, char** argv){
             // cout <<  "-" << j+(1+i)*N<<" "<<(j-1)+(i)*N<<" 0" << endl;
 
             // C4-> 4*(N-1)(N-1)
-            cout <<  "-" <<i<<" "<<"-"<<j+(1+i)*N-N<<" "<<(j-1)+(i)*N-N<<" 0" << endl;
-            cout <<  "-" <<i<<" "<<"-"<<(j-1)+(i)*N-N<<" "<<j+(1+i)*N-N<<" 0" << endl;
-            cout <<i<<" "<<"-"<<j+(i)*N-N<<" "<<j+(1+i)*N-N<<" 0" << endl;
-            cout <<i<<" "<<"-"<<j+(i+1)*N-N<<" "<<j+(i)*N-N<<" 0" << endl;
+            cout <<  "-" <<i<<" "<<"-"<<j+(i-1)*K1+N<<" "<<(j-1)+(i-2)*K1+N<<" 0" << endl;
+            cout <<  "-" <<i<<" "<<"-"<<(j-1)+(i-2)*K1+N<<" "<<j+(i-1)*K1+N<<" 0" << endl;
+            cout <<i<<" "<<"-"<<j+(i-2)*K1+N<<" "<<j+(i-1)*K1+N<<" 0" << endl;
+            cout <<i<<" "<<"-"<<j+(i-1)*K1+N<<" "<<j+(i-2)*K1+N<<" 0" << endl;
 
             // cout << "-" << (j)+(i)*N<<" "<<j+(1+i)*N<<" 0" << endl;
         }
     }
     // C7 ->1
     // for(int i=K1+1;i<=N;i++)
-    //     cout<<"-"<<i+N*(N+1)-N<<" 0"<<endl;
-    cout<<K1+N*(N+1)-N<<" 0"<<endl;
+    //     cout<<"-"<<i+N*(N+1)<<" 0"<<endl;
+    cout<<K1+(N-1)*K1+N<<" 0"<<endl;
+
+    
 
     for(int i=1;i<=N;i++){
         // 3.For each not edge, 2 vertices should nt be in the same clique
